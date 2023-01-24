@@ -40,7 +40,6 @@ export const Movies = () => {
   const handleNext = () => {
     setOffset(offSet + pageSize)
   };
-  if (moviesIsLoading) { return <div>Loading</div>; }
   const handlePageSizeChange = (size) => {
     setPageSize(parseInt(10, size))
     const overflow = size - (movies.length - offSet);
@@ -49,6 +48,9 @@ export const Movies = () => {
       else {setOffset(offSet - overflow)};
     }
   }
+
+  if (moviesIsLoading) { return <div>Loading</div>; }
+  
   return (
     <Styled.Container>
       <Filters
@@ -56,13 +58,19 @@ export const Movies = () => {
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter} 
       />
-      { !!movies.length ? (
+      { !movies.length 
+        ? <div>Il n'y a aucun films dans cette liste</div> 
+        : (
         <Styled.Movies>
-          <Styled.CardsList>
+          {/* This hack allows me to display required tabs with CSS, and therefore to persist state change for the vote without redux, cookies or refetching the updated data 
+            I would then use a slice method in l69 and l78 that will destroy and mount components on page change. I am however only used to refetchQuery and server
+            side pagination.
+            Another solution would be to directly update the state of the movies array to persist state when cards are destroyed / mounted again
+          */}
+          <Styled.CardsList $min={offSet} $max={offSet+pageSize}>
             { selectedFilter
               ? movies
                 .filter((movie) => movie.category === selectedFilter)
-                .slice(offSet, offSet + pageSize)
                 .map((movie) => (
                   <Card
                     movie={movie}
@@ -71,7 +79,6 @@ export const Movies = () => {
                   />
                 ))
               : movies
-                .slice(offSet, offSet + pageSize)
                 .map((movie) => (
                   <Card
                     movie={movie}
@@ -101,8 +108,6 @@ export const Movies = () => {
             </Styled.PaginationButton>
           </Styled.Pagination>
         </Styled.Movies>
-      ) : (
-        <div>Il n'y a aucun films dans cette liste</div>
       )}
     </Styled.Container>
   )

@@ -16,10 +16,22 @@ export const Movies = styled.div`
 `;
 
 export const CardsList = styled.div`
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
+
+    /* This hack allows me to display required tabs with CSS, and therefore to persist state change for the vote without redux, cookies or refetching the updated data 
+    I would then use a slice method in movies.jsx l69 and l78 that will destroy and mount components on page change. I am however only used to refetchQuery and server
+    side pagination. */
+    & > * {
+        display: none;
+    }
+    ${({ $min, $max }) => `
+        & > *:nth-child(n+${$min+1}):nth-child(-n+${$max}) {
+            display: flex !important;
+        }
+    `}
+    
 
     @media screen and (max-width: 800px) {
         grid-template-columns: repeat(3, 1fr);
