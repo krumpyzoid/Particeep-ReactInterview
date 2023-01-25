@@ -9,7 +9,7 @@ Take home assignment for Particeep's recruitment process
 ## Technologies
 To complete this assignment, I created the react app with Vite.
 I also installed `styled-components` and `prop-types`.
-I chose not to use Redux, at all because it is not a technology I am used to (I did use Pinia/Vuex on Vue, but I'm used to having Apollo manage the application cache/refetchQueries instead of using a store). I'll be happy to learn Redux best practices with you :)
+I chose not to use `redux` at all because it is not a technology I am used to (I did use Pinia/Vuex on Vue, but I'm used to having Apollo manage the application cache/refetchQueries instead of using a store). I'll be happy to learn Redux best practices with you :)
 
 ## Comments
 The first version of the app used a `.slice(offSet, offSet + pageSize)` chained method on `movies.filter` and `movies` for the pagination. Because I am not storing the votes or manipulating the movies array from a store/main component, that meant the data would be lost each time a card was destroyed/rendered.
