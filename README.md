@@ -31,3 +31,5 @@ However this hack does only work for cards destroyed for pagination reasons and 
 It was my first time manually implementing pagination. I'm used to server side pagination and usually had it covered by our `table` components on the front-end. I think I covered most of the edge cases by going with an offset/pagesize approach and making sure the offset makes change when changing the page size.
 
 I did not use ESLint for this project, so you can see how I naturally write my code. I did include my usual `eslintrc.json` in the project.
+
+It would probably be better to create a memo for the filtered array of movies with a dependency on the filter. Will make it more readable and more efficient than to run `movies.filter().length` each time it is required (adding logic for no filter / filter makes it verbose).
