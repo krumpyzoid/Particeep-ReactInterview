@@ -29,3 +29,5 @@ export const CardsList = styled.div`
 However this hack does only work for cards destroyed for pagination reasons and not when filtering items. The headache to make it work with filtering probably makes it worth installing redux :)
 
 It was my first time manually implementing pagination. I'm used to server side pagination and usually had it covered by our `table` components on the front-end. I think I covered most of the edge cases by going with an offset/pagesize approach and making sure the offset makes change when changing the page size.
+
+I did not use ESLint for this project, so you can see how I naturally write my code. I did include my usual `eslintrc.json` in the project.
