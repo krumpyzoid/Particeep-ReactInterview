@@ -28,7 +28,7 @@ export const CardsList = styled.div`
     }
     ${({ $min, $max }) => `
         & > *:nth-child(n+${$min+1}):nth-child(-n+${$max}) {
-            display: flex !important;
+            display: flex;
         }
     `}
     

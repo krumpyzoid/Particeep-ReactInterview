@@ -23,7 +23,11 @@ export const Movies = () => {
     }
   }, [movies]);
 
-  const [selectedFilter, setSelectedFilter] = useState(''); 
+  const [selectedFilter, setSelectedFilter] = useState('');
+  const handleSelectFilter = (filter) => {
+    setOffset(0);
+    setSelectedFilter(filter);
+  }
   const filtersList = useMemo(
     () => {
       if (movies.length === 0) { return []; }
@@ -56,7 +60,7 @@ export const Movies = () => {
       <Filters
         filtersList={filtersList}
         selectedFilter={selectedFilter}
-        setSelectedFilter={setSelectedFilter} 
+        handleSelectFilter={handleSelectFilter} 
       />
       { !movies.length 
         ? <div>Il n'y a aucun films dans cette liste</div> 
@@ -101,7 +105,7 @@ export const Movies = () => {
               Prev
             </Styled.PaginationButton>
             <Styled.PaginationButton 
-              $disabled={offSet + pageSize >= movies.length}
+              $disabled={offSet + pageSize >= movies.filter((movie) => { if(!selectedFilter) return true; return movie.category === selectedFilter}).length}
               onClick={() => handleNext()}
             >
               Next

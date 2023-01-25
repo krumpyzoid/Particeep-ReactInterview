@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import * as Styled from './style';
 
-export const Filters = ({ filtersList, selectedFilter, setSelectedFilter }) => {
+export const Filters = ({ filtersList, selectedFilter, handleSelectFilter }) => {
   return (
     <Styled.Filters>
       <Styled.Title>
@@ -9,7 +9,7 @@ export const Filters = ({ filtersList, selectedFilter, setSelectedFilter }) => {
       </Styled.Title>
       { filtersList.map((filter) => (
         <Styled.Filter 
-          onClick={() => setSelectedFilter(filter)} 
+          onClick={() => handleSelectFilter(filter)} 
           $selected={selectedFilter === filter}
           key={filter}
         >
@@ -17,7 +17,7 @@ export const Filters = ({ filtersList, selectedFilter, setSelectedFilter }) => {
         </Styled.Filter>
       ))}
       { selectedFilter && (
-          <Styled.Remove onClick={() => setSelectedFilter('')} >
+          <Styled.Remove onClick={() => handleSelectFilter('')} >
             Retirer le filtre
           </Styled.Remove>
         )}
@@ -28,5 +28,5 @@ export const Filters = ({ filtersList, selectedFilter, setSelectedFilter }) => {
 Filters.propTypes = {
   filtersList: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedFilter: PropTypes.string.isRequired,
-  setSelectedFilter: PropTypes.func.isRequired,
+  handleSelectFilter: PropTypes.func.isRequired,
 }
